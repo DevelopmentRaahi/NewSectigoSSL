@@ -474,7 +474,7 @@ footer,.footer-section{
   z-index: 100;
 }
 .toTopButton.show{
-  display: block;
+  display: block !important;
 }
 
 

@@ -1,73 +1,3 @@
-// let mybutton = document.getElementById("btn-back-to-top");
-// let socialIcons = document.querySelector(".whatsap_button");
-
-// // When the user scrolls down 20px from the top of the document, show the button
-// window.onscroll = function () {
-//   scrollFunction();
-// };
-
-// function scrollFunction() {
-//   if (
-//     document.body.scrollTop > 20 ||
-//     document.documentElement.scrollTop > 20
-//   ) {
-//     socialIcons.style.display = "block";
-//     mybutton.style.display = "block";
-//   } else {
-//     mybutton.style.display = "none";
-//     socialIcons.style.display = "none";
-//   }
-// }
-// // When the user clicks on the button, scroll to the top of the document
-// mybutton.addEventListener("click", backToTop);
-
-// function backToTop() {
-//   document.body.scrollTop = 0;
-//   document.documentElement.scrollTop = 0;
-// }
-const mybutton = document.getElementById("btn-back-to-top");
-let socialIcons = document.querySelector(".whatsap_button");
-
-// When the user scrolls down 20px from the top of the document, show the button
-if(mybutton){
-function scrollFunction() {
-  if ( document.documentElement.scrollTop > 10  ) {
-        socialIcons.style.display = "block";
-       mybutton.classList.add('show')  
-  } else {
-       socialIcons.style.display = "none";
-        mybutton.classList.remove('show')  
-    }
-}
-
-window.addEventListener("scroll", scrollFunction)
-}
-
-// When the user clicks on the button, scroll to the top of the document
-mybutton.addEventListener("click", backToTop);
-
-function backToTop() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-
-// window.addEventListener('scroll', function() {
-//   var navbar = document.getElementById('navbg');
-//   if (window.scrollY > 50) {
-//     // navbar.classList.add('bg-change_now'); 
-//     navbar.style.backgroundColor = "#fff"; 
-//   }
-// });
-
-/*=============== SHOW MENU ===============*/
-
-
-
-
-/**
-
-*/
-
 (function() {
   "use strict";
 
@@ -94,7 +24,10 @@ function backToTop() {
     mobileNavToggleBtn.classList.toggle('bi-list');
     mobileNavToggleBtn.classList.toggle('bi-x');
   }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  
+  if (mobileNavToggleBtn) {
+    mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  }
 
   /**
    * Hide mobile nav on same-page/hash links
@@ -105,7 +38,6 @@ function backToTop() {
         mobileNavToogle();
       }
     });
-
   });
 
   /**
@@ -120,8 +52,6 @@ function backToTop() {
     });
   });
 
-  
-
   /**
    * Scroll top button
    */
@@ -132,19 +62,46 @@ function backToTop() {
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  
+  if (scrollTop) {
+    scrollTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
 
+  /**
+   * Show/hide back to top button and social icons on scroll
+   */
+  let mybutton = document.getElementById("btn-back-to-top");
+  let socialIcons = document.querySelector(".whatsap_button");
+
+  if (mybutton && socialIcons) {
+    function scrollFunction() {
+      if (window.scrollY > 10) {
+        socialIcons.style.display = "block";
+        mybutton.classList.add('show');
+      } else {
+        socialIcons.style.display = "none";
+        mybutton.classList.remove('show');
+      }
+    }
+
+    function backToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    window.addEventListener("scroll", scrollFunction);
+    mybutton.addEventListener("click", backToTop);
+  }
+
 })();
-
-
-
-
